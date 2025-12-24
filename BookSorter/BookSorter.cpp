@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <string>
 
-// Класс книги
+
 class Book
 {
 public:
@@ -23,7 +23,6 @@ private:
     int         year_;
 };
 
-// Функтор-сортировщик: сначала по автору, потом по названию
 struct BookSorter
 {
     bool operator()(const Book* a, const Book* b) const
@@ -34,7 +33,6 @@ struct BookSorter
     }
 };
 
-// Функтор-поисковик: год в диапазоне [minYear, maxYear]
 class BookFinder
 {
 public:
@@ -57,27 +55,24 @@ int main()
 {
     setlocale(LC_ALL, "RUSSIAN");
 
-    // Коллекция книг
     std::vector<Book*> books;
-    books.push_back(new Book("Война и мир", "Толстой Л.Н.", 2010));
-    books.push_back(new Book("Подросток", "Достоевский Ф.М.", 2004));
-    books.push_back(new Book("Обрыв", "Гончаров И.А.", 2010));
-    books.push_back(new Book("Анна Каренина", "Толстой Л.Н.", 1999));
-    books.push_back(new Book("Обыкновенная история", "Гончаров И.А.", 2011));
-    books.push_back(new Book("Утраченные иллюзии", "Бальзак О.", 2009));
-    books.push_back(new Book("Оливер Твист", "Диккенс Ч.", 2001));
-    books.push_back(new Book("Фауст", "Гёте И.В.", 2010));
-    books.push_back(new Book("Дюина Долина", "Бальзак О.", 1998));
+    books.push_back(new Book("Г‚Г®Г©Г­Г  ГЁ Г¬ГЁГ°", "Г’Г®Г«Г±ГІГ®Г© Г‹.ГЌ.", 2010));
+    books.push_back(new Book("ГЏГ®Г¤Г°Г®Г±ГІГ®ГЄ", "Г„Г®Г±ГІГ®ГҐГўГ±ГЄГЁГ© Г”.ГЊ.", 2004));
+    books.push_back(new Book("ГЋГЎГ°Г»Гў", "ГѓГ®Г­Г·Г Г°Г®Гў Г€.ГЂ.", 2010));
+    books.push_back(new Book("ГЂГ­Г­Г  ГЉГ Г°ГҐГ­ГЁГ­Г ", "Г’Г®Г«Г±ГІГ®Г© Г‹.ГЌ.", 1999));
+    books.push_back(new Book("ГЋГЎГ»ГЄГ­Г®ГўГҐГ­Г­Г Гї ГЁГ±ГІГ®Г°ГЁГї", "ГѓГ®Г­Г·Г Г°Г®Гў Г€.ГЂ.", 2011));
+    books.push_back(new Book("Г“ГІГ°Г Г·ГҐГ­Г­Г»ГҐ ГЁГ«Г«ГѕГ§ГЁГЁ", "ГЃГ Г«ГјГ§Г ГЄ ГЋ.", 2009));
+    books.push_back(new Book("ГЋГ«ГЁГўГҐГ° Г’ГўГЁГ±ГІ", "Г„ГЁГЄГЄГҐГ­Г± Г—.", 2001));
+    books.push_back(new Book("Г”Г ГіГ±ГІ", "ГѓВёГІГҐ Г€.Г‚.", 2010));
+    books.push_back(new Book("Г„ГѕГЁГ­Г  Г„Г®Г«ГЁГ­Г ", "ГЃГ Г«ГјГ§Г ГЄ ГЋ.", 1998));
 
-    // 1. Сортировка
-    std::cout << "Книги в алфавитном порядке:\n";
+    std::cout << "ГЉГ­ГЁГЈГЁ Гў Г Г«ГґГ ГўГЁГІГ­Г®Г¬ ГЇГ®Г°ГїГ¤ГЄГҐ:\n";
     std::sort(books.begin(), books.end(), BookSorter());
     for (const auto& b : books)
         std::cout << b->getAuthor() << " \"" << b->getName() << "\"\n";
 
-    // 2. Поиск книг 2005-2014 гг.
     BookFinder book_finder(2005, 2014);
-    std::cout << "\nКниги в диапазоне года издания 2005 - 2014:\n";
+    std::cout << "\nГЉГ­ГЁГЈГЁ Гў Г¤ГЁГ ГЇГ Г§Г®Г­ГҐ ГЈГ®Г¤Г  ГЁГ§Г¤Г Г­ГЁГї 2005 - 2014:\n";
     auto it = std::find_if(books.begin(), books.end(), book_finder);
     while (it != books.end())
     {
@@ -85,7 +80,6 @@ int main()
         it = std::find_if(++it, books.end(), book_finder);
     }
 
-    // Освобождение памяти
     for (auto& b : books) delete b;
     return 0;
 }
